@@ -1,0 +1,28 @@
+version: '3.3'
+services:
+    db:
+        image: postgres
+        container_name: postgresServer
+        restart: always
+        environment: 
+            POSTGRES_PASSWORD: ChangeMe
+    adminer:
+        image: adminer
+        container_name: adminerServer
+        restart: always
+        ports:
+            - 8888:8080
+    report:
+        image: grafana/grafana
+        container_name: grafanaServer
+        restart: always
+        ports:
+            - 3000:3000
+    ##todo: write the collector service
+    # collector:
+    #    build: ../indoor/collector
+    ## below is only needed to simulate the gardenServer API it can be commented out.
+    garden-service:
+        build: ../outdoor/rest-api
+        ports:
+            - 5000:5000
