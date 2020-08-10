@@ -18,9 +18,8 @@ services:
         restart: always
         ports:
             - 3000:3000
-    ##todo: write the collector service
-    # collector:
-    #    build: ../indoor/collector
+    collector:
+       build: ../indoor/collector
     ## below is only needed to simulate the gardenServer API it can be commented out.
     garden-service:
         build: ../outdoor/rest-api

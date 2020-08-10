@@ -2,7 +2,7 @@
 
 import requests
 
-r = requests.get('http://127.0.0.1:5000/api/gardenServer')
+r = requests.get('http://127.0.0.1:5000/api/solar')
 
 ## Get status code
 r.status_code
