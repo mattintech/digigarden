@@ -7,9 +7,15 @@ mydb = mysql.connector.connect(
   database="digigarden"
 )
 
-def addSolarData(solarData):
+def insertData(sqlQuery, values):
     mycursor = mydb.cursor()
-    sql = "INSERT INTO solarControllerData (batteryVoltage, solarVoltage, chargingCurrent, loadCurrent) VALUES (%s, %s, %s, %s)"
-    val = (1, 2, 3, 4)
-    mycursor.execute(sql, solarData)
+    mycursor.execute(sqlQuery, values)
     mydb.commit()
+
+def addSolarData(solarData):
+    sql = "INSERT INTO solarControllerData (batteryVoltage, solarVoltage, chargingCurrent, loadCurrent) VALUES (%s, %s, %s, %s)"
+    insertData(sql, solarData)    
+
+def piStatistics(piData):
+    sql = "INSERT INTO piData (hostname, wlan_ipaddress, free_space) VALUES (%s %s %s)"
+    insertData(sql, piData)
