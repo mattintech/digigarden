@@ -24,7 +24,7 @@ def getSolarData():
          return jsonify(
                             batteryVoltage=getRandNumber(),
                             solarVoltage=getRandNumber(),
-                            charingCurrent=getRandNumber(),
+                            chargingCurrent=getRandNumber(),
                             loadCurrent=getRandNumber())
 
     #except (IndexError, IOError) as e:
