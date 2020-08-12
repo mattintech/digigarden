@@ -1,6 +1,9 @@
 #!/usr/bin/python
 import random
+import socket
 from flask import Flask, jsonify
+
+hostname=socket.gethostname()
 
 apiWebServerPort=5000
 app = Flask(__name__)
@@ -12,7 +15,7 @@ def getRandNumber():
 ##AppRoutes - basic test to make sure its working
 @app.route('/', methods=['GET'])
 def home():
-    return 'Welcome to the Garden API Server!'
+    return 'Welcome to the Garden API Server!  Docker host: '+ hostname
 
 ## route to display data from serial controller
 @app.route('/api/solar', methods=['GET'])
