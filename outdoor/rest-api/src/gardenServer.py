@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 import random
 from flask import Flask, jsonify
 from digiGardenServer import piDataUtils
