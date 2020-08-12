@@ -2,7 +2,7 @@
 
 import requests
 from digiGarden import dbHelper
-
+    
 
 def getSolarData():
     r = requests.get('http://localhost:5000/api/solar')
@@ -18,6 +18,20 @@ def getSolarData():
         jsonResponse['loadCurrent'])
         )
 
+def getPiData():
+    r = requests.get('http://localhost:5000/api/piData')
+    ## Get status code
+    r.status_code
+    ## get body in a dict
+    jsonResponse = r.json()
+    dbHelper.piStatistics(
+        (
+        jsonResponse['hostname'],
+        jsonResponse['wlan_ipaddress'],
+        jsonResponse['free_space'])
+        )
+
 
 
 getSolarData()
+getPiData()

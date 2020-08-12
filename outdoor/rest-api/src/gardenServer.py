@@ -1,9 +1,7 @@
 #!/usr/bin/python
 import random
-import socket
 from flask import Flask, jsonify
-
-hostname=socket.gethostname()
+from digiGardenServer import piDataUtils
 
 apiWebServerPort=5000
 app = Flask(__name__)
@@ -15,7 +13,7 @@ def getRandNumber():
 ##AppRoutes - basic test to make sure its working
 @app.route('/', methods=['GET'])
 def home():
-    return 'Welcome to the Garden API Server!  Docker host: '+ hostname
+    return 'Welcome to the Garden API Server!  Docker host: '+ deviceHostname
 
 ## route to display data from serial controller
 @app.route('/api/solar', methods=['GET'])
@@ -26,11 +24,20 @@ def getSolarData():
                             solarVoltage=getRandNumber(),
                             chargingCurrent=getRandNumber(),
                             loadCurrent=getRandNumber())
+    except (IndexError, IOError) as e:
+        return jsonify({'error': e.message}), 503
 
-    #except (IndexError, IOError) as e:
-    except Exception as e:
-        print(e)
-        #return jsonify({'error': e.message}), 503
+## Pi Stats
+@app.route('/api/piData', methods=['GET'])
+def getPiData():
+    try:
+        return jsonify(
+                hostname=piDataUtils.hostname,
+                wlan_ipaddress=piDataUtils.ipaddr,
+                free_space=piDataUtils.getFreeSpaceInMb()
+        )
+    except (IndexError, IOError) as e:
+        return jsonify({'error': e.message}), 503
 
 try: 
     app.run(host='0.0.0.0', port=apiWebServerPort)
