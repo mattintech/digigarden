@@ -28,9 +28,14 @@ def getPiData():
         (
         jsonResponse['hostname'],
         jsonResponse['wlan_ipaddress'],
+        jsonResponse['cpu_usage'],
+        jsonResponse['total_memory'],
+        jsonResponse['free_memory'],
         jsonResponse['free_space'],
-        jsonResponse['pi_temperature'])
-        )
+        jsonResponse['pi_temperature'],
+        jsonResponse['system_boot_time'],
+        jsonResponse['system_uptime']
+        ))
 
 
 

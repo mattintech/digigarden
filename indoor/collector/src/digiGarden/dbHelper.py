@@ -18,5 +18,7 @@ def addSolarData(solarData):
     insertData(sql, solarData)    
 
 def piStatistics(piData):
-    sql = "INSERT INTO piData (hostname, wlan_ipaddress, free_space, pi_temperature) VALUES (%s, %s, %s, %s)"
+    sql = """INSERT INTO piData (hostname, wlan_ipaddress, cpu_usage, total_memory, free_memory, free_space, 
+    pi_temperature, system_boot_time, system_uptime) 
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"""
     insertData(sql, piData)
