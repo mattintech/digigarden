@@ -1,27 +1,55 @@
 version: '3.3'
 services:
+#    db:
+#        image: postgres
+#        #container_name: postgresServer
+#        #hostname: dbserver
+#        restart: always
+#        environment: 
+#            POSTGRES_PASSWORD: ChangeMe
+#        networks:
+#            - mynet
     db:
-        image: postgres
-        container_name: postgresServer
+        image: mysql
+        command: --default-authentication-plugin=mysql_native_password
         restart: always
         environment: 
-            POSTGRES_PASSWORD: ChangeMe
+            MYSQL_ROOT_PASSWORD: password
+        ports:
+            - 3306:3306
+        networks:
+            - mynet
+        
     adminer:
         image: adminer
-        container_name: adminerServer
+        #container_name: adminerServer
         restart: always
         ports:
             - 8888:8080
+        networks:
+            - mynet
     report:
         image: grafana/grafana
-        container_name: grafanaServer
+        #container_name: grafanaServer
         restart: always
         ports:
             - 3000:3000
-    collector:
-       build: ../indoor/collector
+        networks:
+            - mynet
+#    collector:
+#       build: ../indoor/collector
+#       image: docker_collector
+#       #hostname: collector
+#       networks:
+#        - mynet
     ## below is only needed to simulate the gardenServer API it can be commented out.
     garden-service:
         build: ../outdoor/rest-api
+        image: docker_garden-service
+        #hostname: gardenapi
         ports:
             - 5000:5000
+        networks:
+            - mynet
+networks:
+    mynet:
