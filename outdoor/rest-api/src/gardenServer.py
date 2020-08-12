@@ -34,7 +34,8 @@ def getPiData():
         return jsonify(
                 hostname=piDataUtils.hostname,
                 wlan_ipaddress=piDataUtils.ipaddr,
-                free_space=piDataUtils.getFreeSpaceInMb()
+                free_space=piDataUtils.getFreeSpaceInMb(),
+                pi_temperature=piDataUtils.getPiTemp()
         )
     except (IndexError, IOError) as e:
         return jsonify({'error': e.message}), 503

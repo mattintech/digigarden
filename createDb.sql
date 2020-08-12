@@ -1,7 +1,6 @@
 SET NAMES utf8;
 SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
-SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
 SET NAMES utf8mb4;
 
@@ -13,7 +12,8 @@ CREATE TABLE `piData` (
   `recordTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `hostname` varchar(64) NOT NULL,
   `wlan_ipaddress` varchar(64) NOT NULL,
-  `free_space` bigint NOT NULL
+  `free_space` bigint NOT NULL,
+  `pi_temperature` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
